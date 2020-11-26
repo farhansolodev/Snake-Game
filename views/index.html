@@ -8,54 +8,81 @@
 		<link rel="stylesheet" type="text/css" href="./styles/scoreboard.css" />
 		<link rel="stylesheet" type="text/css" href="./styles/signin.css" />
 		<link rel="stylesheet" type="text/css" href="./styles/menu.css" />
+		<link rel="stylesheet" type="text/css" href="./styles/leaderboard.css" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-		<script src="./src/index.js" defer type="module"></script>
+		<script src="./src/index.js" type="module"></script>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-		<!-- <script src="./src/input.js" defer type="module"></script> -->
+		<img id="logo" alt="logo" src="./Images/FancySnake.png" />
+		<audio id="main-music" src="./music/Chiptronical.mp3" loop="loop"></audio>
 	</head>
+
 	<body>
-		
-		<div id="menuModal" class ="menu-page">
-			<div class ="form">
-					<button id="joinGameBtn" class="menuBtn" type="button">Join Game</button>
-					<p class = "msg">  </a></p>
-					<button id="leaderBoardBtn" class="menuBtn" type="button">Leaderboard</button>
-			</div>
+		<!-- We have the Main Menu with the 2 buttons that can be found there -->
+		<div id="menuModal">
+			<button id="joinGameBtn" class="menuBtn" type="button">Join Game</button>
+			<button id="leaderBoardBtn" class="menuBtn" type="button">Leaderboard</button>
 		</div>
 
-		<div id="signinmodal" class="login-page">
+		<!-- This div is responsible for the Login / Registering part of the website -->
+		<div id="signin-modal">
 			<div class="form">
-				<form class="register-form">
-					<input type="text" placeholder="Username" />
-					<input type="password" placeholder="Password" />
-					<button id="registerbtn" type="button">Register</button>
-					<p class="msg">Already Registered? <a class="msg" href="#">Login</a></p>
-				</form>
-				<form class="login-form">
-					<input type="text" placeholder="Username" />
-					<input type="password" placeholder="Password" />
-					<button id="loginbtn" type="button">Login</button>
-					<p class="msg">Not Registered? <a class="msg" href="#">Register</a></p>
-				</form>
+				<div class="register-form innerForm">
+					<input id="register-username" type="text" placeholder="Username" />
+					<input id="register-password" type="password" placeholder="Password" />
+					<button id="registerbtn">Register</button>
+					<p class="msg">Already Registered? <a class="msg" style="color: #bea0d3; text-decoration: none" href="#">Login</a></p>
+				</div>
+				<div class="login-form innerForm">
+					<input id="login-username" type="text" placeholder="Username" />
+					<input id="login-password" type="password" placeholder="Password" />
+					<button id="loginbtn">Login</button>
+					<p class="msg">Not Registered? <a class="msg" style="color: #bea0d3; text-decoration: none" href="#">Register</a></p>
+				</div>
 			</div>
 		</div>
+		<!-- A small disclaimr -->
+		<p id="Disclaimer">Disclaimer: This Game Contains Bright Colors.</p>
 
+		<!-- This script right here is used to make the transition between the login and registering screens more responsive with the user. -->
 		<script>
 			$(".message a").click(function () {
-				$("form").animate({ height: "toggle", opacity: "toggle" },"slow");
-			});
+				$(".innerForm").animate({ height: "toggle", opacity: "toggle" }, "slow")
+			})
 		</script>
 
 		<script>
 			$(document).ready(function () {
 				$("p").click(function () {
-					$("form").toggle(1000);
-				});
-			});
+					$(".innerForm").toggle(1000)
+				})
+			})
 		</script>
-		<div id="game-map"></div>
+
+		<!-- This container help hold the waiting screen that you can find as soon as you join a game and the buttons to leave the game as soon as you die. -->
+		<div id="container">
+			<div id="waiting-box">
+				<button id="back2leaderBoardBtn" type="button">LeaderBoard</button>
+				<h1 id="waiting-text">.</h1>
+				<h1 id="rotate-text">Please Rotate Your Device</h1>
+			</div>
+			<!-- This is the game maps div which help us draw the snakes and the food on. -->
+			<div id="game-map"></div>
+		</div>
+		<!-- Here we have the scoreboard that could be found on the right of the game map when someone joins the game. -->
 		<div id="scoreboard">
-			<table></table>
+			<table id="tableScoreboard"></table>
+		</div>
+		<!-- Everything related to the leaderboard is here -->
+		<button id="back2menuBtn" type="button">Main Menu</button>
+		<button id="sign-out-btn" type="button">Sign Out</button>
+		<div id="Leaderboard">
+			<table id="LeaderBoardTable">
+				<tr>
+					<th>Rank</th>
+					<th>Username</th>
+					<th>Wins</th>
+				</tr>
+			</table>
 		</div>
 	</body>
 </html>

@@ -1,24 +1,19 @@
-body {
-	height: 100vh; /* 100% of viewport height */
-	width: 100vw; /* 100% of viewport width */
-	display: flex; /* Establishes a flex formatting context */
-	justify-content: center; /*Centers the game map horizontally */
-	align-items: center; /*Centers the game map vertically */
-	/* justify-content: space-around; LEAVE THIS FOR NOW */
-	margin: 0; /* Sets no margins for the game map */
-	background-color: #e5e5e5; /* Background color surrounding the game map */
-	/* grid-template-columns: 72% auto;
-	grid-template-rows: 5% auto 5%;
-	grid-template-areas: "hd hd" "game scoreboard"; */
-}
+/*
+Game map and other game CSS page.
+
+We used a grid template to allow us to divide our game map into small sizes that
+allows us to draw the snake on and make the food spawn in different places.
+
+*/
 
 #game-map {
 	background-color: #000000; /* Sets the base color for the map */
+	border: 2px solid white;
 	justify-self: right;
 	/* These 2 make it so that the height/width is always 90% of the narrowest dimension*/
 	width: 90vmin;
 	height: 90vmin;
-
+	box-shadow: 0 0 150px 0 #892be28c;
 	display: none; /*Change this into grid when u want to display it.*/
 	/* By specifying how many rows and columns we want
        for our game map, no matter what size the browser
@@ -28,13 +23,73 @@ body {
 }
 
 .snake {
-	background-color: #1b2d53; /* Sets the default color for the snake */
-	border: 0.05vmin solid rgb(255, 255, 255);
+	background-color: #892be28c; /* Defualt Color of the Snake. */
+	border: 0.03vmin solid rgb(255, 255, 255);
 	border-radius: 0.25vmin;
 }
 
 .food {
-	background-color: green; /* Sets the default color for the snake */
-	border: 0.25vmin solid green;
+	background-color: #008000; /* Sets the default color for the food */
+	border: 0.25vmin solid #008000;
 	border-radius: 0.5vmin;
+}
+
+#waiting-box {
+	background-color: #000000;
+	justify-self: right;
+	display: none;
+	width: 90vmin;
+	height: 90vmin;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid white;
+	box-shadow: 0 0 150px 0 #892be28c;
+}
+
+#waiting-text {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 4vmin;
+	color: whitesmoke;
+}
+#container {
+	display: none;
+	justify-self: right;
+	width: 90vmin;
+	height: 90vmin;
+	position: relative;
+}
+
+#game-map,
+#waiting-box {
+	position: absolute;
+}
+
+#back2leaderBoardBtn {
+	text-transform: uppercase;
+	color: rgb(255, 255, 255);
+	margin-top: 2%;
+	margin-left: 2%;
+	display: none;
+	padding: 2%;
+	background: #000000;
+	font-size: 10px;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+#rotate-text {
+	display: none;
+}
+
+/*This part is used to make the website responsive on the smart phones and different computer screens. */
+
+@media only screen and (max-width: 1000px) and (orientation: portrait) {
+	#waiting-text {
+		display: none;
+	}
+	#rotate-text {
+		color: whitesmoke;
+		font-size: 4vmin;
+		display: block;
+	}
 }
